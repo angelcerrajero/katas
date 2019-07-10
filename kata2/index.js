@@ -1,5 +1,6 @@
 let numRomano = "";
 let numArabe = 0;
+let checkRomano =0;
 
 /* /////////// FUNCION PASAR A ROMANOS  ///////////////////*/
 function toRoman(num){
@@ -60,9 +61,11 @@ function toArab(string) {
         }
      }
      
-    if (typeof string !== "string") {
-        console.log("Introduce un numero Romano valido");
-    }else{
+     checkRomano = validador(string);
+     if(checkRomano === -1){
+        console.log("Introduce un numero Romano valido.")
+        return -1;
+     }else{
         for (i=0; i<string.length; i++){
             num = letraToNumero(string[i]);
             numSiguiente= letraToNumero(string[i+1]);
@@ -76,11 +79,31 @@ function toArab(string) {
     }
     }
     
+    
+    /* /////////// VALIDADOR  ///////////////////*/
+
+      function validador (string){
+        let expRegular = /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
+
+        if (typeof string !== "string") {
+            console.log("Introduce un numero Romano valido");
+        }else{
+            if (expRegular.test(string) == true){
+                return 1;
+
+            }else {
+                return -1
+            }
+        }
+    }
 
     numRomano = toRoman(1234);
     console.log("El numero Romano es: ", numRomano);
 
     numArabe = toArab("MDCCCLXXIV");
+    if (numArabe === -1){
+        console.log ("no se pouede convertir")
+    }else{
     console.log("El numero Arabe es: ", numArabe);
-
-    
+    }   
+  
