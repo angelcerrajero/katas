@@ -83,7 +83,7 @@ function toArab(string) {
     /* /////////// VALIDADOR  ///////////////////*/
 
       function validador (string){
-        let expRegular = /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
+        const expRegular = /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
 
         if (typeof string !== "string") {
             console.log("Introduce un numero Romano valido");
