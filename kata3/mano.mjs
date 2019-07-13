@@ -1,4 +1,4 @@
-let valor = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+let valor = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"];
 let palo = ["S", "H", "C", "D"];
 let mano1 = [];
 let mano2 = [];
@@ -108,27 +108,52 @@ function personaCartas (nombre, string) {
     }
     this.valor = arrValor;
     this.palo = arrPalo;
+    this.manoOrdenada = arrayOrdenado;
 }
 
-function queMano (arrayValores, arrayPalos) {
+function escaleraColor (arrayValores, arrayPalos, mano) {
+    let validado =0;
 
     for(let r = 0; r < arrayValores.length; r++){
-        console.log(arrayValores);
-
+        if (arrayValores[r] === "T"){
+            arrayValores[r] = 10;
+        }else if (arrayValores[r] === "J"){
+            arrayValores[r] = 11;
+        }else if (arrayValores[r] === "Q"){
+            arrayValores[r] = 12;
+        }else if (arrayValores[r] === "K"){
+            arrayValores[r] = 13;
+        }else if (arrayValores[r] === "A"){
+            arrayValores[r] = 14;
+        }else{        
+            arrayValores[r] = parseInt(arrayValores[r]);
+        }
     }
 
-
-
-
-
+    for(let i= 0; i < arrayPalos.length; i++){
+        //console.log(arrayPalos[i])
+        if (arrayPalos[i] === arrayPalos[i+1]){
+            //console.log("mismo palo")
+            for(let h=0 ; h < arrayValores.length; h++){
+                //console.log(arrayValores[h] +1 , arrayValores[h+1])
+                if(arrayValores[h] +1 === arrayValores[h+1]){
+                    validado++;
+                }
+            }
+        }
+    }
+    
+    if(validado === 12){
+        return true;
+    }
 }
 
 
 
-//export const jugador1 = new jugador ("jugador1", cartas());
-//export const jugador2 = new jugador ("jugador2", cartas());
+export const jugador1 = new jugador ("jugador1", cartas());
+export const jugador2 = new jugador ("jugador2", cartas());
 
-const persona1 = new personaCartas ("persona1", "AS KD 5S 9C 2H");
+const persona1 = new personaCartas ("persona1", "AS QS JS TS 9S");
 const persona2 = new personaCartas ("persona2", "2C 3H 9S 8C AH");
 
 
@@ -146,7 +171,9 @@ if(comprobar(mano1) === 1 /*&& comprobar(mano2) ===1*/){
     console.log("El array de valores es: ", persona2.valor);
     console.log("El array de palos es: ", persona2.palo);*/
 
-    queMano(persona1.valor, persona1.palo);
+    if (escaleraColor(persona1.valor, persona1.palo, persona1.manoOrdenada) === true){
+        console.log("escalera de color");
+    }
 
 
 
