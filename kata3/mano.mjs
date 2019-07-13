@@ -4,6 +4,20 @@ let mano1 = [];
 let mano2 = [];
 //la variable cartas tiene toda la baraja con sus posibles cruces.
 
+export const cartas2 = function barajaCartas2() {
+    let baraja =[];
+    for( let v=0; v<valor.length; v++){
+        //console.log(palo[p]);
+        for(let p=0; p<palo.length; p++){
+          //  console.log(valor[v]);
+            baraja.push(valor[v]+palo[p]);
+        }
+    }
+    return baraja;
+    //console.log(baraja);
+}
+
+
 
 export const cartas = function barajaCartas() {
     let baraja =[];
@@ -61,57 +75,78 @@ function personaCartas (nombre, string) {
     let array = [];
     let arrValor =[];
     let arrPalo = [];
-    let barajaDeCartas = cartas();
+    let barajaDeCartas = cartas2();
     let arrayOrdenado = [];
 
     this.nombre = nombre;
     array = string.split(" ");
     this.mano = array;
 
-    for (let j=0; j<array.length; j++){
-        arrValor.push(array[j].charAt(0));
-        
-        arrPalo.push(array[j].charAt(1));
-        
-    }
-    //console.log (cartas());
-    for (let number = 0; number < array.length; number++){
-        for(let h=0; h < barajaDeCartas.length; h++){
-            if (array[number] === barajaDeCartas[h]){
-                let posicion = h;
-                console.log("la carta: ", array[number], "esta en posicion: ", h);
-                if (array[number])
+    for (let number = 0; number < barajaDeCartas.length; number++){
+        for(let h=0; h < array.length; h++){
+            if (barajaDeCartas[number] === array[h]){
+                arrayOrdenado.push(array[h]);
+                
+                /*
+                if (a >= b) {
+                    arrayOrdenado.push(array[number])
+                }else {
+                    arrayOrdenado.push(array[number+1])
+                }*/
+                
+                
+
             }
         }
+        
     }
-
+    for (let j=0; j<arrayOrdenado.length; j++){
+        arrValor.push(arrayOrdenado[j].charAt(0));
+        
+        arrPalo.push(arrayOrdenado[j].charAt(1));
+        
+    }
     this.valor = arrValor;
     this.palo = arrPalo;
+}
 
-    
+function queMano (arrayValores, arrayPalos) {
+
+    for(let r = 0; r < arrayValores.length; r++){
+        console.log(arrayValores);
+
+    }
+
+
+
 
 
 }
 
 
 
-
-
 //export const jugador1 = new jugador ("jugador1", cartas());
 //export const jugador2 = new jugador ("jugador2", cartas());
 
-const persona1 = new personaCartas ("persona1", "2H 3D 5S 9C KD");
+const persona1 = new personaCartas ("persona1", "AS KD 5S 9C 2H");
 const persona2 = new personaCartas ("persona2", "2C 3H 9S 8C AH");
 
-console.log(persona1.nombre, persona1.mano, "El array de valores es: ", persona1.valor, " El array de palos es: ", persona1.palo);
-//console.log(persona2.nombre, persona2.mano);
+
+
 mano1 = persona1.mano;
 mano2 = persona2.mano;
 
-if(comprobar(mano1) === 1 && comprobar(mano2) ===1){
-    console.log("Mano Correcta")
-    
+if(comprobar(mano1) === 1 /*&& comprobar(mano2) ===1*/){
+    /*console.log("Mano Correcta");
+    console.log(persona1.nombre, persona1.mano);
+    console.log("El array de valores ordenados es: ", persona1.valor);
+    console.log("El array de palos es: ", persona1.palo);
+    console.log("");
+    console.log(persona2.nombre, persona2.mano);
+    console.log("El array de valores es: ", persona2.valor);
+    console.log("El array de palos es: ", persona2.palo);*/
 
+    queMano(persona1.valor, persona1.palo);
 
 
 
