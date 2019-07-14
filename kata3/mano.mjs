@@ -1,9 +1,14 @@
+// PARA CAMBIAR LOS PARAMETROS DE LAS MANOS DE LOS JUGADORES, DIRIGIRSE A LA LINEA 466 y 467 DEL CODIGO. 
+
 let valor = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"];
 let palo = ["S", "H", "C", "D"];
 let mano1 = [];
 let mano2 = [];
 let resultadoUno = 0;
 let resultadoDos = 0;
+let cartaMasAltaUno =0;
+let cartaMasAltaDos =0;
+
 //Controlo los resultados siendo: 0=carta mas alta, 1=pareja, 2=doble pareja. 3=trio, 4=escalera, 5=color, 6=full, 7=poker, 8=escalera de color.
 
 export const cartas2 = function barajaCartas2() {
@@ -447,14 +452,19 @@ function ganaDos(resultadoDos){
 
     }
 }
+///////////// TERMINA APARTADO DE FUNCIONES //////////////////////////////////
 
 
 
-//export const jugador1 = new jugador ("jugador1", cartas());
-//export const jugador2 = new jugador ("jugador2", cartas());
 
-const persona1 = new personaCartas ("persona1", "7H 9D TD 3C AC");
-const persona2 = new personaCartas ("persona2", "7H 8H 9H TH JH");
+/*////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////AQUI EMPIEZA EL CODIGO Y LA CREACION DE LAS PERSONAS CON SUS MANOS///////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////*/
+
+const persona1 = new personaCartas ("persona1", "2H 3D 5S 9C KD"); //CAMBIAR MANO JUGADOR 1
+const persona2 = new personaCartas ("persona2", "2C 3H 4S 8C AH"); //CAMBIAR MANO JUGADOR 1
 
 
 
@@ -489,16 +499,11 @@ if(comprobar(mano1) === 1 && comprobar(mano2) ===1){
         console.log(persona1.nombre, "tiene una Pareja");
         resultadoUno=1;
     }else{ 
-        let cartaMasAltaUno = cartaMasAlta(persona1.valor)
+        cartaMasAltaUno = cartaMasAlta(persona1.valor)
         console.log(persona1.nombre, "tiene Carta mas Alta");
         resultadoUno =0;
 
     }
-    
-
-        
-    
-
     
 
 
@@ -527,32 +532,47 @@ if(comprobar(mano1) === 1 && comprobar(mano2) ===1){
         console.log(persona2.nombre, "tiene una Pareja");
         resultadoDos=1;
     }else{ 
-        let cartaMasAltaDos = cartaMasAlta(persona1.valor)
+        cartaMasAltaDos = cartaMasAlta(persona2.valor)
         console.log(persona2.nombre, "tiene Carta mas Alta");
         resultadoDos =0;
 
     }
-
-    console.log(resultadoUno);
-    console.log(resultadoDos);
+console.log("")
+console.log ("EL RESULTADO DE LA PARTIDA ES:")
 
     if(resultadoUno > resultadoDos){
         ganaUno(resultadoUno)
 
     }else if(resultadoDos > resultadoUno){
         ganaDos(resultadoDos)
+    }else if(resultadoUno === resultadoDos){
+        if(resultadoUno===0 && resultadoDos===0){
+            //console.log(cartaMasAltaUno, cartaMasAltaDos)
+            if(cartaMasAltaUno > cartaMasAltaDos){
+                console.log(persona1.nombre, "Gana con Carta mas alta")
+            }else if(cartaMasAltaDos > cartaMasAltaUno){
+                console.log(persona2.nombre, "Gana con Carta mas alta")
+            }
+        }else if (resultadoUno === 1 && resultadoDos === 1){
+                console.log("Empate a Parejas")
+        }else if (resultadoUno === 2 && resultadoDos === 2){
+            console.log("Empate a Dobles Parejas")
+        }else if (resultadoUno === 3 && resultadoDos === 3){
+            console.log("Empate a Trios")
+        }else if (resultadoUno === 4 && resultadoDos === 4){
+            console.log("Empate a Escaleras")
+        }else if (resultadoUno === 5 && resultadoDos === 5){
+            console.log("Empate a Dobles Color")
+        }else if (resultadoUno === 6 && resultadoDos === 6){
+            console.log("Empate a Full")
+        }else if (resultadoUno === 7 && resultadoDos === 7){
+            console.log("Empate a Poker")
+        }else if (resultadoUno === 8 && resultadoDos === 8){
+            console.log("Empate a Escalera de Color")
     }
-
-
-        
-
-
-   
-
+}
+    
 }else {
     console.log("Alguna mano de un Jugador incorrecta, introduce unas cartas validas. Por favor no intentes hacer trampas....O_o")
 
 }
-
-//console.log(jugador1.nombre, jugador1.getMano());
-//console.log(jugador2.nombre, jugador1.getMano());
