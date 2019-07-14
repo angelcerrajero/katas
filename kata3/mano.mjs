@@ -129,6 +129,7 @@ function escaleraColor (arrayValores, arrayPalos, mano) {
 
 function poker (arrayValores, arrayPalos){
     let validado =0;
+    let A =0;
 
     for(let r = 0; r < arrayValores.length; r++){
         if (arrayValores[r] === "T"){
@@ -146,24 +147,236 @@ function poker (arrayValores, arrayPalos){
         }
     }
 
-    for (let i=0; i < arrayValores.length; i++){
-        if(arrayValores[i] === arrayValores[i+1]){
+    for(let i = 0; i<arrayValores.length; i++){
+        if(arrayValores[i] == arrayValores[i+1]){
+            A = arrayValores[i];
+            break;
+        }
+    }
+
+    const filtroA = arrayValores.filter(elemento => elemento === A);
+    
+    if(filtroA.length == 4){
+        return true;
+    }
+    
+    
+
+}
+
+
+function full (arrayValores, arrayPalos){
+    let pareja = 0;
+    let trio = 0;
+    let A = 0;
+    let B = 0;
+    let validado = 0;
+
+    for(let r = 0; r < arrayValores.length; r++){
+        if (arrayValores[r] === "T"){
+            arrayValores[r] = 10;
+        }else if (arrayValores[r] === "J"){
+            arrayValores[r] = 11;
+        }else if (arrayValores[r] === "Q"){
+            arrayValores[r] = 12;
+        }else if (arrayValores[r] === "K"){
+            arrayValores[r] = 13;
+        }else if (arrayValores[r] === "A"){
+            arrayValores[r] = 14;
+        }else{        
+            arrayValores[r] = parseInt(arrayValores[r]);
+        }
+    }
+
+    for(let i = 0; i<arrayValores.length; i++){
+        if(arrayValores[i] == arrayValores[i+1]){
+            A = arrayValores[i];
+            break;
+        }
+
+    }
+    for(let j=0; j<arrayValores.length; j++){
+        if(arrayValores[j]== arrayValores[j+1] && arrayValores[j] !== A){
+            B = arrayValores[j];
+            break;
+        }
+
+    }
+
+    const filtroA = arrayValores.filter(elemento => elemento === A);
+    const filtroB = arrayValores.filter(elemento=> elemento === B);
+
+    if(filtroA.length == 2 && filtroB.length == 3 || filtroA.length == 3 && filtroB.length == 2){
+        return true;
+    }
+
+   
+}
+
+
+function color (arrayValores, arrayPalos){
+    let validado=0;
+
+    for (let i =0; i<arrayPalos.length; i++){
+        if(arrayPalos[i] === arrayPalos[i+1]){
             validado++
         }
     }
 
+if(validado === 4){
+    return true;
+}
+}
+
+
+function escalera (arrayValores, arrayPalos){
+    let validado =0;
+
+    for(let r = 0; r < arrayValores.length; r++){
+        if (arrayValores[r] === "T"){
+            arrayValores[r] = 10;
+        }else if (arrayValores[r] === "J"){
+            arrayValores[r] = 11;
+        }else if (arrayValores[r] === "Q"){
+            arrayValores[r] = 12;
+        }else if (arrayValores[r] === "K"){
+            arrayValores[r] = 13;
+        }else if (arrayValores[r] === "A"){
+            arrayValores[r] = 14;
+        }else{        
+            arrayValores[r] = parseInt(arrayValores[r]);
+        }
+    }
+
+    for(let h=0 ; h < arrayValores.length; h++){
+        if(arrayValores[h]+1 === arrayValores[h+1]){
+            validado++;
+        }
+    }
+
+    if(validado === 4){
+        return true;
+    }
+}
+
+
+function trio(arrayValores, arrayPalos){
+    let validado =0;
+
+    for(let r = 0; r < arrayValores.length; r++){
+        if (arrayValores[r] === "T"){
+            arrayValores[r] = 10;
+        }else if (arrayValores[r] === "J"){
+            arrayValores[r] = 11;
+        }else if (arrayValores[r] === "Q"){
+            arrayValores[r] = 12;
+        }else if (arrayValores[r] === "K"){
+            arrayValores[r] = 13;
+        }else if (arrayValores[r] === "A"){
+            arrayValores[r] = 14;
+        }else{        
+            arrayValores[r] = parseInt(arrayValores[r]);
+        }
+    }
+
+    for(let h=0 ; h < arrayValores.length; h++){
+        if(arrayValores[h] === arrayValores[h+1]){
+            validado++;
+        }
+    }
+
     if(validado === 3){
-     return true;
+        return true;
+    }
+}
+
+
+function doblesParejas(arrayValores, arrayPalos){
+    let A =0;
+    let B =0;
+
+    for(let r = 0; r < arrayValores.length; r++){
+        if (arrayValores[r] === "T"){
+            arrayValores[r] = 10;
+        }else if (arrayValores[r] === "J"){
+            arrayValores[r] = 11;
+        }else if (arrayValores[r] === "Q"){
+            arrayValores[r] = 12;
+        }else if (arrayValores[r] === "K"){
+            arrayValores[r] = 13;
+        }else if (arrayValores[r] === "A"){
+            arrayValores[r] = 14;
+        }else{        
+            arrayValores[r] = parseInt(arrayValores[r]);
+        }
+    }
+    for(let i = 0; i<arrayValores.length; i++){
+        if(arrayValores[i] == arrayValores[i+1]){
+            A = arrayValores[i];
+            break;
+        }
+
+    }
+    for(let j=0; j<arrayValores.length; j++){
+        if(arrayValores[j]== arrayValores[j+1] && arrayValores[j] !== A){
+            B = arrayValores[j];
+            break;
+        }
+
+    }
+
+    const filtroA = arrayValores.filter(elemento => elemento === A);
+    const filtroB = arrayValores.filter(elemento=> elemento === B);
+
+    if(filtroA.length && filtroB.length == 2){
+        return true;
+    }
+}
+
+
+function pareja (arrayValores, arrayPalos){
+    let validado =0;
+    let A =0;
+
+    for(let r = 0; r < arrayValores.length; r++){
+        if (arrayValores[r] === "T"){
+            arrayValores[r] = 10;
+        }else if (arrayValores[r] === "J"){
+            arrayValores[r] = 11;
+        }else if (arrayValores[r] === "Q"){
+            arrayValores[r] = 12;
+        }else if (arrayValores[r] === "K"){
+            arrayValores[r] = 13;
+        }else if (arrayValores[r] === "A"){
+            arrayValores[r] = 14;
+        }else{        
+            arrayValores[r] = parseInt(arrayValores[r]);
+        }
+    }
+
+    for(let i = 0; i<arrayValores.length; i++){
+        if(arrayValores[i] == arrayValores[i+1]){
+            A = arrayValores[i];
+            break;
+        }
+    }
+
+    const filtroA = arrayValores.filter(elemento => elemento === A);
+    if(filtroA.length == 2){
+        return true;
     }
 
 }
 
 
 
+
+
+
 //export const jugador1 = new jugador ("jugador1", cartas());
 //export const jugador2 = new jugador ("jugador2", cartas());
 
-const persona1 = new personaCartas ("persona1", "AH AS 4C AD AS");
+const persona1 = new personaCartas ("persona1", "2H 4S 4C 2D 4H");
 const persona2 = new personaCartas ("persona2", "2C 3H 9S 8C AH");
 
 
@@ -172,7 +385,7 @@ mano1 = persona1.mano;
 mano2 = persona2.mano;
 
 if(comprobar(mano1) === 1 && comprobar(mano2) ===1){
-    /*console.log("Mano Correcta");
+/*    console.log("Mano Correcta");
     console.log(persona1.nombre, persona1.mano);
     console.log("El array de valores ordenados es: ", persona1.valor);
     console.log("El array de palos es: ", persona1.palo);
@@ -181,14 +394,35 @@ if(comprobar(mano1) === 1 && comprobar(mano2) ===1){
     console.log("El array de valores es: ", persona2.valor);
     console.log("El array de palos es: ", persona2.palo);*/
 
-    /*if (escaleraColor(persona1.valor, persona1.palo, persona1.manoOrdenada) === true){
+    if (escaleraColor(persona1.valor, persona1.palo, persona1.manoOrdenada) === true){
         console.log(persona1.nombre, "tiene una escalera de color");
     }
 
     if (poker(persona1.valor, persona1.palo, persona1.manoOrdenada) === true){
         console.log(persona1.nombre, "tiene un poker");
-    }*/
-    
+    }
+
+    if (full(persona1.valor, persona1.palo) === true){
+        console.log(persona1.nombre, "tiene un full");
+    }
+
+    if (color(persona1.valor, persona1.palo) === true){
+        console.log(persona1.nombre, "tiene un color");
+    }
+    if (escalera(persona1.valor, persona1.palo) === true){
+        console.log(persona1.nombre, "tiene escalera");
+    }
+    if (trio(persona1.valor, persona1.palo) === true){
+        console.log(persona1.nombre, "tiene Trio");
+    }
+
+    if (doblesParejas(persona1.valor, persona1.palo) === true){
+        console.log(persona1.nombre, "tiene Dobles parejas");
+    }
+
+    if(pareja(persona1.valor, persona1.palo) === true){
+        console.log(persona1.nombre, "tiene una Pareja");
+    }
 
 
 
