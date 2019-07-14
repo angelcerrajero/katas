@@ -2,7 +2,9 @@ let valor = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"];
 let palo = ["S", "H", "C", "D"];
 let mano1 = [];
 let mano2 = [];
-
+let resultadoUno = 0;
+let resultadoDos = 0;
+//Controlo los resultados siendo: 0=carta mas alta, 1=pareja, 2=doble pareja. 3=trio, 4=escalera, 5=color, 6=full, 7=poker, 8=escalera de color.
 
 export const cartas2 = function barajaCartas2() {
     let baraja =[];
@@ -120,8 +122,7 @@ function escaleraColor (arrayValores, arrayPalos, mano) {
             }
         }
     }
-    
-    if(validado === 12){
+    if(validado === 16){
         return true;
     }
 }
@@ -369,15 +370,91 @@ function pareja (arrayValores, arrayPalos){
 }
 
 
+function cartaMasAlta (arrayValores){
+    return arrayValores[4];
 
+
+}
+
+
+
+
+
+
+function ganaUno(resultadoUno){
+            
+    switch(resultadoUno){
+        case 8: 
+                return console.log(persona1.nombre, "Gana con Escalera de color");
+
+        case 7:
+                return console.log(persona1.nombre, "Gana con Poker");
+
+        case 6:
+                return console.log(persona1.nombre, "Gana con Full");
+
+        case 5:
+                return console.log(persona1.nombre, "Gana con Color");
+
+        case 4:
+                return console.log(persona1.nombre, "Gana con Escalera");
+
+        case 3:
+                return console.log(persona1.nombre, "Gana con Trio");
+
+        case 2:
+                return console.log(persona1.nombre, "Gana con Dobles Parejas");
+
+        case 1: 
+                return console.log(persona1.nombre, "Gana con Parejas");
+        
+        case 0: 
+                return console.log(persona1.nombre, "Gana con Carta mas Alta");
+
+    }
+}
+
+
+function ganaDos(resultadoDos){
+            
+    switch(resultadoDos){
+        case 8: 
+                return console.log(persona2.nombre, "Gana con Escalera de color");
+
+        case 7:
+                return console.log(persona2.nombre, "Gana con Poker");
+
+        case 6:
+                return console.log(persona2.nombre, "Gana con Full");
+
+        case 5:
+                return console.log(persona2.nombre, "Gana con Color");
+
+        case 4:
+                return console.log(persona2.nombre, "Gana con Escalera");
+
+        case 3:
+                return console.log(persona2.nombre, "Gana con Trio");
+
+        case 2:
+                return console.log(persona2.nombre, "Gana con Dobles Parejas");
+
+        case 1: 
+                return console.log(persona2.nombre, "Gana con Parejas");
+
+        case 0: 
+                return console.log(persona2.nombre, "Gana con Carta mas Alta");
+
+    }
+}
 
 
 
 //export const jugador1 = new jugador ("jugador1", cartas());
 //export const jugador2 = new jugador ("jugador2", cartas());
 
-const persona1 = new personaCartas ("persona1", "2H 4S 4C 2D 4H");
-const persona2 = new personaCartas ("persona2", "2C 3H 9S 8C AH");
+const persona1 = new personaCartas ("persona1", "7H 9D TD 3C AC");
+const persona2 = new personaCartas ("persona2", "7H 8H 9H TH JH");
 
 
 
@@ -385,47 +462,92 @@ mano1 = persona1.mano;
 mano2 = persona2.mano;
 
 if(comprobar(mano1) === 1 && comprobar(mano2) ===1){
-/*    console.log("Mano Correcta");
-    console.log(persona1.nombre, persona1.mano);
-    console.log("El array de valores ordenados es: ", persona1.valor);
-    console.log("El array de palos es: ", persona1.palo);
-    console.log("");
-    console.log(persona2.nombre, persona2.mano);
-    console.log("El array de valores es: ", persona2.valor);
-    console.log("El array de palos es: ", persona2.palo);*/
+//Controlo los resultados siendo: 0=carta mas alta, 1=pareja, 2=doble pareja. 3=trio, 4=escalera, 5=color, 6=full, 7=poker, 8=escalera de color.
 
     if (escaleraColor(persona1.valor, persona1.palo, persona1.manoOrdenada) === true){
         console.log(persona1.nombre, "tiene una escalera de color");
-    }
-
-    if (poker(persona1.valor, persona1.palo, persona1.manoOrdenada) === true){
+        resultadoUno=8;
+    }else if (poker(persona1.valor, persona1.palo, persona1.manoOrdenada) === true){
         console.log(persona1.nombre, "tiene un poker");
-    }
-
-    if (full(persona1.valor, persona1.palo) === true){
+        resultadoUno=7;
+    }else if (full(persona1.valor, persona1.palo) === true){
         console.log(persona1.nombre, "tiene un full");
-    }
-
-    if (color(persona1.valor, persona1.palo) === true){
+        resultadoUno=6;
+    }else if (color(persona1.valor, persona1.palo) === true){
         console.log(persona1.nombre, "tiene un color");
-    }
-    if (escalera(persona1.valor, persona1.palo) === true){
+        resultadoUno=5;
+    }else if (escalera(persona1.valor, persona1.palo) === true){
         console.log(persona1.nombre, "tiene escalera");
-    }
-    if (trio(persona1.valor, persona1.palo) === true){
+        resultadoUno=4;
+    }else if (trio(persona1.valor, persona1.palo) === true){
         console.log(persona1.nombre, "tiene Trio");
-    }
-
-    if (doblesParejas(persona1.valor, persona1.palo) === true){
+        resultadoUno=3;
+    }else if (doblesParejas(persona1.valor, persona1.palo) === true){
         console.log(persona1.nombre, "tiene Dobles parejas");
-    }
-
-    if(pareja(persona1.valor, persona1.palo) === true){
+        resultadoUno=2;
+    }else if(pareja(persona1.valor, persona1.palo) === true){
         console.log(persona1.nombre, "tiene una Pareja");
+        resultadoUno=1;
+    }else{ 
+        let cartaMasAltaUno = cartaMasAlta(persona1.valor)
+        console.log(persona1.nombre, "tiene Carta mas Alta");
+        resultadoUno =0;
+
+    }
+    
+
+        
+    
+
+    
+
+
+    if (escaleraColor(persona2.valor, persona2.palo, persona2.manoOrdenada) === true){
+        console.log(persona2.nombre, "tiene una escalera de color");
+        resultadoDos=8;
+    }else if (poker(persona2.valor, persona2.palo, persona2.manoOrdenada) === true){
+        console.log(persona2.nombre, "tiene un poker");
+        resultadoDos=7;
+    }else if (full(persona2.valor, persona2.palo) === true){
+        console.log(persona2.nombre, "tiene un full");
+        resultadoDos=6;
+    }else if (color(persona2.valor, persona2.palo) === true){
+        console.log(persona2.nombre, "tiene un color");
+        resultadoDos=5;
+    }else if (escalera(persona2.valor, persona2.palo) === true){
+        console.log(persona2.nombre, "tiene escalera");
+        resultadoDos=4;
+    }else if (trio(persona2.valor, persona2.palo) === true){
+        console.log(persona2.nombre, "tiene Trio");
+        resultadoDos=3;
+    }else if (doblesParejas(persona2.valor, persona2.palo) === true){
+        console.log(persona2.nombre, "tiene Dobles parejas");
+        resultadoDos=2;
+    }else if(pareja(persona2.valor, persona2.palo) === true){
+        console.log(persona2.nombre, "tiene una Pareja");
+        resultadoDos=1;
+    }else{ 
+        let cartaMasAltaDos = cartaMasAlta(persona1.valor)
+        console.log(persona2.nombre, "tiene Carta mas Alta");
+        resultadoDos =0;
+
+    }
+
+    console.log(resultadoUno);
+    console.log(resultadoDos);
+
+    if(resultadoUno > resultadoDos){
+        ganaUno(resultadoUno)
+
+    }else if(resultadoDos > resultadoUno){
+        ganaDos(resultadoDos)
     }
 
 
+        
 
+
+   
 
 }else {
     console.log("Alguna mano de un Jugador incorrecta, introduce unas cartas validas. Por favor no intentes hacer trampas....O_o")
