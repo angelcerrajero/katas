@@ -62,6 +62,7 @@ function check (num) {
             
     //console.log(num, frase); 
     //console.log(num, "->" + frase);
+    //paso por aqui
     
     }
 }
